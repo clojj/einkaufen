@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "4.5"
+script:
+  - echo "deploying to firebaseapp"
+install:
+  - npm install -g firebase-tools
+after_success:
+  - firebase deploy --token $FIREBASE_TOKEN
+  - echo "deployed successfully"

@@ -1,0 +1,13 @@
+{
+
+  "staticFileGlobs": [
+
+    "public/**/!(service-worker).@(css|js|html|txt)"
+
+  ],
+
+  "staticPrefix": "public",
+
+  "root": "public"
+
+}

@@ -1,0 +1,118 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+
+	<link href="https://wir-brauchen.firebaseapp.com/icon-hires.png" rel="icon" sizes="192x192"/>
+	<link href="https://wir-brauchen.firebaseapp.com/icon-normal.png" rel="icon" sizes="128x128"/>
+	<link href="images/icon-hires.png" rel="apple-touch-icon"/>
+
+    <meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<link rel="stylesheet" href="layout.css">
+
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="694005772598-6ss1umbc4nbqg2q0ademd02bmr7bgpgt.apps.googleusercontent.com">
+    <meta name="google-signin-cookiepolicy" content="single_host_origin">
+    <meta name="google-signin-scope" content="profile email">
+
+</head>
+<body>
+<script src="service-worker-registration.js"></script>
+
+<div id="contSignin" class="containerSignin">
+    <div id="signinButton" class="g-signin2" data-onsuccess="onSignIn"></div>
+</div>
+
+<div id="demo"></div>
+<script src="main.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
+<script>
+    // TODO replace with https://github.com/stoeffel/elm-online
+    window.addEventListener('online',  function (ev) { alert('on') });
+    window.addEventListener('offline', function (ev) { alert('off') });
+
+    // Initialize Firebase
+    var config = {
+    	// TODO paste here
+    };
+    firebase.initializeApp(config);
+    // Get a reference to the database service
+    // firebase.database.enableLogging(true);
+    var database = firebase.database();
+    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+    // START Google Sign-In
+    function onSignIn(googleUser) {
+        var uid = googleUser.getId();
+        console.log('Google Auth Response', googleUser);
+        // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+        var unsubscribe = firebase.auth().onAuthStateChanged(function (firebaseUser) {
+            unsubscribe();
+            // Check if we are already signed-in Firebase with the correct user.
+            if (!isUserEqual(googleUser, firebaseUser)) {
+                // Build Firebase credential with the Google ID token.
+                var credential = firebase.auth.GoogleAuthProvider.credential(googleUser.getAuthResponse().id_token);
+                // Sign in with credential from the Google user.
+                firebase.auth().signInWithCredential(credential).catch(function (error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    alert("You are not an active/authorized user!");
+                });
+            } else {
+                console.log('User ' + uid + ' already signed-in Firebase.');
+            }
+
+            // TODO
+            var csignin = document.getElementById('contSignin');
+            csignin.parentNode.removeChild(csignin);
+
+            var userRef = database.ref('users/' + uid + "/active");
+            userRef.on('value', function(snapshot) {
+                var data = snapshot.val();
+                if (data) {
+                    // start Elm Application
+                    var node = document.getElementById('demo');
+                    var app = Elm.Main.embed(node, data);
+                    function abcReady() {
+                        function handlerABC(event) {
+                            event.preventDefault();
+                            console.log('touched abc' + event);
+                        }
+                        var abc = document.getElementById('abcColumn');
+                        abc.addEventListener('touchmove', handlerABC, {passive: false});
+                    }
+                    setTimeout(abcReady, 0);
+                } else {
+                    alert("Sorry, not authorized !");
+                }
+            });
+
+        });
+    }
+
+    function isUserEqual(googleUser, firebaseUser) {
+        if (firebaseUser) {
+            var providerData = firebaseUser.providerData;
+            for (var i = 0; i < providerData.length; i++) {
+                if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+                    providerData[i].uid === googleUser.getBasicProfile().getId()) {
+                    // We don't need to reauth the Firebase connection.
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    // END Google Sign-In
+
+</script>
+</body>
+</html>
