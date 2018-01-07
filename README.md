@@ -17,15 +17,8 @@ Make resources available offline:
 
 ## TODOS
 
-- centered signin page + info-page if not authorized/active (instead of alert)
+- info-page if not authorized/active (instead of alert)
+- access user's DB node from Elm and render liste
 
 - pass something more useful than Bool into Elm (Flags)
-- access user's DB node from Elm and render liste
-- on-/offline events + reload without cache; update to 0.18: https://github.com/stoeffel/elm-online
-
-- better (responsive) fonts or "variable fonts" https://varvy.com/mobile/legible-font-size.html
-
-
-
-firebase project-694005772598
- 
+- on-/offline events into Elm + reload without cache; update to 0.18: https://github.com/stoeffel/elm-online

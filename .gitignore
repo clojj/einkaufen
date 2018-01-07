@@ -6,4 +6,5 @@ elm-stuff
 repl-temp-*
 einkaufen.iml
 .idea/
+firebase-config.txt
 firebase-debug.log
