@@ -8468,7 +8468,7 @@ var _zwilias$elm_touch_events$Touch$onStart = function (tagger) {
 };
 
 var _user$project$Main$abc = _elm_lang$core$String$toList('AÄBCDEFGHIJKLMNOÖPQRSTUÜVWXYZ');
-var _user$project$Main$subscriptions = function (model) {
+var _user$project$Main$subscriptions = function (_p0) {
 	return _elm_lang$core$Platform_Sub$none;
 };
 var _user$project$Main$swipeSensitivity = 30;
@@ -8496,20 +8496,20 @@ var _user$project$Main$gestureType = function (gesture) {
 };
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
 			case 'NoOp':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'Swipe':
-				var _p1 = _p0._0;
-				var newGesture = A2(_zwilias$elm_touch_events$Touch$record, _p1, model.gesture);
+				var _p2 = _p1._0;
+				var newGesture = A2(_zwilias$elm_touch_events$Touch$record, _p2, model.gesture);
 				var newY = A2(
 					_elm_lang$core$Debug$log,
 					'Y=',
 					function (_) {
 						return _.y;
 					}(
-						_zwilias$elm_touch_events$Touch$locate(_p1)));
+						_zwilias$elm_touch_events$Touch$locate(_p2)));
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -8518,7 +8518,7 @@ var _user$project$Main$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			default:
-				var newGesture = A2(_zwilias$elm_touch_events$Touch$record, _p0._0, model.gesture);
+				var newGesture = A2(_zwilias$elm_touch_events$Touch$record, _p1._0, model.gesture);
 				var tt = A2(
 					_elm_lang$core$Debug$log,
 					'touch-type: ',
@@ -8538,7 +8538,7 @@ var _user$project$Main$SwipeEnd = function (a) {
 var _user$project$Main$Swipe = function (a) {
 	return {ctor: 'Swipe', _0: a};
 };
-var _user$project$Main$view = function (model) {
+var _user$project$Main$view = function (_p3) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{

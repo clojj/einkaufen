@@ -1,9 +1,9 @@
-module Main exposing (..)
+module Main exposing (main)
 
 import Debug
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import String exposing (..)
+import String exposing (toList, toUpper, fromChar)
 import Touch
 
 
@@ -96,7 +96,6 @@ update msg model =
                 newGesture : Touch.Gesture
                 newGesture =
                     Touch.record touch model.gesture
-
             in
                 ( { model | gesture = newGesture, posY = newY }, Cmd.none )
 
@@ -107,8 +106,8 @@ update msg model =
                     Touch.record touch model.gesture
 
                 tt : Maybe TouchType
-                tt = Debug.log "touch-type: " (gestureType newGesture)
-
+                tt =
+                    Debug.log "touch-type: " (gestureType newGesture)
             in
                 ( { model | gesture = newGesture, touchType = tt }, Cmd.none )
 
@@ -118,7 +117,7 @@ update msg model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
     Sub.none
 
 
@@ -128,11 +127,11 @@ subscriptions model =
 
 abc : List Char
 abc =
-    String.toList "AÄBCDEFGHIJKLMNOÖPQRSTUÜVWXYZ"
+    toList "AÄBCDEFGHIJKLMNOÖPQRSTUÜVWXYZ"
 
 
 view : Model -> Html Msg
-view model =
+view _ =
     div [ class "container" ]
         [ div []
             (List.map (\n -> div [ class "items" ] [ text ("item" ++ toString n) ]) (List.range 1 100))
