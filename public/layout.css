@@ -35,7 +35,7 @@ body {
 
 	display: grid;
 	/*grid-gap: 3px;*/
-	grid-template-columns: 5fr minmax(60px, 1fr);
+	grid-template-columns: 6fr;
 	grid-template-rows: auto;
 }
 
@@ -57,13 +57,15 @@ body {
 	top: 0.0%;
 	right: 0.0%;
 	text-align: center;
-	background-color: lightblue;
+
+	grid-column: 6 / -1;
+	grid-row: 1 / -1;
 
 	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(29, 1fr);
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	grid-auto-rows: 1fr;
 }
 
 .letter {
-	width: 40px;
+	background-color: lightblue;
 }
