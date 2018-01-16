@@ -149,23 +149,25 @@ view model =
                         [ HA.class "letteroverlay" ]
                         [ text l ]
     in
-        H.div [ HA.class "container" ]
-            [ H.div []
-                (List.map (\n -> H.div [ HA.class "items" ] [ H.text ("item" ++ toString n) ]) (List.range 1 100))
-            , letterDisplay
-            , H.div
-                [ HA.class "settings"
+        H.div []
+            [ letterDisplay
+            , H.div [ HA.class "container" ]
+                [ H.div []
+                    (List.map (\n -> H.div [ HA.class "items" ] [ H.text ("item" ++ toString n) ]) (List.range 1 100))
+                , H.div
+                    [ HA.class "settings"
 
-                --            , Touch.onStart Swipe
-                --            , Touch.onEnd SwipeEnd
+                    --            , Touch.onStart Swipe
+                    --            , Touch.onEnd SwipeEnd
+                    ]
+                    [ H.img [ HA.src "images/ic_settings_black_24dp_2x.png", HA.alt "Settings" ] [] ]
                 ]
-                [ H.img [ HA.src "images/ic_settings_black_24dp_2x.png", HA.alt "Settings" ] [] ]
             , H.div
                 [ HA.id "abcId"
                 , HA.class "abc"
                 , HA.style [ ( "height", "100%" ) ]
                 ]
-                [ svg [ width "100%", height "100%", viewBox "0 0 50 530" ]
+                [ svg [ HA.id "svgABC", width "100%", height "100%", viewBox "0 0 20 530" ]
                     [ text_
                         [ x "0", y "15", fontSize "16", writingMode "tb", rotate "-90" ]
                         (List.map

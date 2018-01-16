@@ -55,7 +55,7 @@ body {
     background-color: lightblue;
     position: fixed;
     height: 100%;
-    /*width: 10%;*/
+    width: 20%;
     top: 0.0%;
     right: 0;
 
@@ -64,8 +64,10 @@ body {
 }
 
 .letteroverlay {
-    background-color: lightblue;
+    background-color: lightgreen;
     position: fixed;
-    top: 10.0%;
+    width: 10%;
     right: 50%;
+    text-align: center;
+    font-size: 5.0vmin;
 }

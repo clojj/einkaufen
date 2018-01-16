@@ -8834,92 +8834,103 @@ var _user$project$Main$view = function (model) {
 	}();
 	return A2(
 		_elm_lang$html$Html$div,
+		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('container'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{ctor: '[]'},
-				A2(
-					_elm_lang$core$List$map,
-					function (n) {
-						return A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('items'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										'item',
-										_elm_lang$core$Basics$toString(n))),
-								_1: {ctor: '[]'}
-							});
-					},
-					A2(_elm_lang$core$List$range, 1, 100))),
+			_0: letterDisplay,
 			_1: {
 				ctor: '::',
-				_0: letterDisplay,
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('container'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							A2(
+								_elm_lang$core$List$map,
+								function (n) {
+									return A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('items'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													'item',
+													_elm_lang$core$Basics$toString(n))),
+											_1: {ctor: '[]'}
+										});
+								},
+								A2(_elm_lang$core$List$range, 1, 100))),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('settings'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$img,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$src('images/ic_settings_black_24dp_2x.png'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$alt('Settings'),
+												_1: {ctor: '[]'}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
 				_1: {
 					ctor: '::',
 					_0: A2(
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('settings'),
-							_1: {ctor: '[]'}
+							_0: _elm_lang$html$Html_Attributes$id('abcId'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('abc'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'height', _1: '100%'},
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
 						},
 						{
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$img,
+								_elm_lang$svg$Svg$svg,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$src('images/ic_settings_black_24dp_2x.png'),
+									_0: _elm_lang$html$Html_Attributes$id('svgABC'),
 									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$alt('Settings'),
-										_1: {ctor: '[]'}
-									}
-								},
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$id('abcId'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('abc'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$style(
-											{
-												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'height', _1: '100%'},
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$svg$Svg$svg,
-									{
 										ctor: '::',
 										_0: _elm_lang$svg$Svg_Attributes$width('100%'),
 										_1: {
@@ -8927,68 +8938,68 @@ var _user$project$Main$view = function (model) {
 											_0: _elm_lang$svg$Svg_Attributes$height('100%'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 50 530'),
+												_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 20 530'),
 												_1: {ctor: '[]'}
 											}
 										}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$svg$Svg$text_,
-											{
+									}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$svg$Svg$text_,
+										{
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$x('0'),
+											_1: {
 												ctor: '::',
-												_0: _elm_lang$svg$Svg_Attributes$x('0'),
+												_0: _elm_lang$svg$Svg_Attributes$y('15'),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$svg$Svg_Attributes$y('15'),
+													_0: _elm_lang$svg$Svg_Attributes$fontSize('16'),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$svg$Svg_Attributes$fontSize('16'),
+														_0: _elm_lang$svg$Svg_Attributes$writingMode('tb'),
 														_1: {
 															ctor: '::',
-															_0: _elm_lang$svg$Svg_Attributes$writingMode('tb'),
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$svg$Svg_Attributes$rotate('-90'),
-																_1: {ctor: '[]'}
-															}
+															_0: _elm_lang$svg$Svg_Attributes$rotate('-90'),
+															_1: {ctor: '[]'}
 														}
 													}
 												}
-											},
-											A2(
-												_elm_lang$core$List$map,
-												function (ch) {
-													var letter = _elm_lang$core$String$fromChar(ch);
-													return A2(
-														_elm_lang$svg$Svg$tspan,
-														{
+											}
+										},
+										A2(
+											_elm_lang$core$List$map,
+											function (ch) {
+												var letter = _elm_lang$core$String$fromChar(ch);
+												return A2(
+													_elm_lang$svg$Svg$tspan,
+													{
+														ctor: '::',
+														_0: _elm_lang$svg$Svg_Attributes$x('0'),
+														_1: {
 															ctor: '::',
-															_0: _elm_lang$svg$Svg_Attributes$x('0'),
+															_0: _elm_lang$svg$Svg_Attributes$dy('10'),
 															_1: {
 																ctor: '::',
-																_0: _elm_lang$svg$Svg_Attributes$dy('10'),
-																_1: {
-																	ctor: '::',
-																	_0: _elm_lang$svg$Svg_Attributes$fontFamily('monospace'),
-																	_1: {ctor: '[]'}
-																}
+																_0: _elm_lang$svg$Svg_Attributes$fontFamily('monospace'),
+																_1: {ctor: '[]'}
 															}
-														},
-														{
-															ctor: '::',
-															_0: _elm_lang$svg$Svg$text(letter),
-															_1: {ctor: '[]'}
-														});
-												},
-												_user$project$Main$theABC)),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+														}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$svg$Svg$text(letter),
+														_1: {ctor: '[]'}
+													});
+											},
+											_user$project$Main$theABC)),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
 				}
 			}
 		});
