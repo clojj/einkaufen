@@ -31,10 +31,10 @@ body {
 }
 
 .container {
-	height: 100%;
-
+	/*height: 100%;*/
+    background-color: antiquewhite;
 	display: grid;
-	/*grid-gap: 3px;*/
+	grid-gap: 3px;
 	grid-template-columns: 6fr;
 	grid-template-rows: auto;
 }
@@ -42,7 +42,7 @@ body {
 .items {
 	text-align: left;
 
-	grid-column: 1 / 6;
+	grid-column: 1 / -1;
 	grid-row: 1 / -1;
 }
 
@@ -52,20 +52,13 @@ body {
 }
 
 .abc {
-	position: fixed;
-	height: 100%;
-	top: 0.0%;
-	right: 0.0%;
-	text-align: center;
+    background-color: lightblue;
+    position: fixed;
+    height: 100%;
+    /*width: 10%;*/
+    top: 0.0%;
+    right: 0;
 
-	grid-column: 6 / -1;
-	grid-row: 1 / -1;
-
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-	grid-auto-rows: 1fr;
-}
-
-.letter {
-	background-color: lightblue;
+    /*grid-column: 6 / -1;*/
+    /*grid-row: 1 / -1;*/
 }

@@ -1,8 +1,10 @@
-module Main exposing (main)
+port module Main exposing (main)
 
 import Debug
-import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html as H
+import Html.Attributes as HA
+import Svg exposing (..)
+import Svg.Attributes exposing (..)
 import String exposing (toList, toUpper, fromChar)
 import Touch
 
@@ -13,7 +15,7 @@ type alias Flags =
 
 main : Program Flags Model Msg
 main =
-    Html.programWithFlags
+    H.programWithFlags
         { init = init
         , view = view
         , update = update
@@ -21,8 +23,19 @@ main =
         }
 
 
+port input : (String -> msg) -> Sub msg
 
--- MODEL
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    input AbcTouched
+
+
+type Msg
+    = NoOp
+    | Swipe String Touch.Event
+    | SwipeEnd Touch.Event
+    | AbcTouched String
 
 
 type TouchType
@@ -54,12 +67,6 @@ init flags =
 -- UPDATE
 
 
-type Msg
-    = NoOp
-    | Swipe Touch.Event
-    | SwipeEnd Touch.Event
-
-
 swipeSensitivity : Float
 swipeSensitivity =
     30
@@ -84,14 +91,17 @@ gestureType gesture =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        AbcTouched val ->
+            Debug.log ("AbcTouched " ++ val) ( model, Cmd.none )
+
         NoOp ->
             ( model, Cmd.none )
 
-        Swipe touch ->
+        Swipe s touch ->
             let
                 newY : Float
                 newY =
-                    Debug.log "Y=" (Touch.locate touch |> .y)
+                    Debug.log s (Touch.locate touch |> .y)
 
                 newGesture : Touch.Gesture
                 newGesture =
@@ -113,40 +123,50 @@ update msg model =
 
 
 
--- SUBSCRIPTIONS
-
-
-subscriptions : Model -> Sub Msg
-subscriptions _ =
-    Sub.none
-
-
 
 -- VIEW
 
 
-abc : List Char
-abc =
-    toList "AÄBCDEFGHIJKLMNOÖPQRSTUÜVWXYZ"
+theABC : List Char
+theABC =
+    toList "ABCDEFGHIJKLMNOPQRSTUVWXYZ" -- ÄÖÜ ?
 
 
-view : Model -> Html Msg
+view : Model -> H.Html Msg
 view _ =
-    div [ class "container" ]
-        [ div []
-            (List.map (\n -> div [ class "items" ] [ text ("item" ++ toString n) ]) (List.range 1 100))
-        , div
-            [ class "settings"
-            , Touch.onStart Swipe
-            , Touch.onEnd SwipeEnd
+    H.div [ HA.class "container" ]
+        [ H.div []
+            (List.map (\n -> H.div [ HA.class "items" ] [ H.text ("item" ++ toString n) ]) (List.range 1 100))
+        , H.div
+            [ HA.class "settings"
+
+            --            , Touch.onStart Swipe
+            --            , Touch.onEnd SwipeEnd
             ]
-            [ img [ src "images/ic_settings_black_24dp_2x.png", alt "Settings" ] [] ]
-        , div
-            [ id "abcColumn"
-            , class "abc"
-            , Touch.onStart Swipe
-            , Touch.onMove Swipe
-            , Touch.onEnd SwipeEnd
+            [ H.img [ HA.src "images/ic_settings_black_24dp_2x.png", HA.alt "Settings" ] [] ]
+        , H.div
+            [ HA.id "abcId"
+            , HA.class "abc"
+            , HA.style [ ( "height", "100%" ) ]
             ]
-            (List.map (\ch -> div [ class "letter" ] [ text (ch |> fromChar |> toUpper) ]) abc)
+            [ svg [ width "100%", height "100%", viewBox "0 0 50 530" ]
+                [ text_
+                    [ x "0", y "15", fontSize "16", writingMode "tb", rotate "-90" ]
+                    (List.map
+                        (\ch ->
+                            let
+                                letter =
+                                    (fromChar ch)
+                            in
+                                tspan
+                                    [ x "0"
+                                    , dy "10"
+                                    , fontFamily "monospace"
+                                    ]
+                                    [ text letter ]
+                        )
+                        theABC
+                    )
+                ]
+            ]
         ]

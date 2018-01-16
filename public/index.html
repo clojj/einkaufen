@@ -86,15 +86,18 @@
                     // start Elm Application
                     var node = document.getElementById('demo');
                     var app = Elm.Main.embed(node, data);
-                    function abcReady() {
+                    function appReady() {
                         function handlerABC(event) {
                             event.preventDefault();
-                            console.log('touched abc' + event);
+                            var touch = event.touches[0];
+                            var elem = document.elementFromPoint(touch.clientX, touch.clientY);
+                            console.log('JS handler, touched ' + elem.firstChild.textContent);
+                            app.ports.input.send(elem.firstChild.textContent);
                         }
-                        var abc = document.getElementById('abcColumn');
+                        var abc = document.getElementById('abcId');
                         abc.addEventListener('touchmove', handlerABC, {passive: false});
                     }
-                    setTimeout(abcReady, 0);
+                    setTimeout(appReady, 0);
                 } else {
                     alert("Sorry, not authorized !");
                 }

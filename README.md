@@ -12,10 +12,10 @@ Make resources available offline:
 
     sw-precache --config=sw-precache.json
 
-## ISSUES
-- improve abc column 
-
 ## TODOS
+
+- touchstart + touchmove filtered by **RxJS** ...then sendto Elm port
+  https://github.com/Reactive-Extensions/RxJS/blob/master/doc/gettingstarted/querying.md
 
 - info-page if not authorized/active (instead of alert)
 - access user's DB node from Elm and render liste
