@@ -91,8 +91,10 @@
                     function appReady() {
 
                         var abc = document.getElementById('abcId');
-                        var move = Rx.Observable.fromEvent(abc, 'touchmove');
-                        var letters = move.map(function (event) {
+                        var touchstart = Rx.Observable.fromEvent(abc, 'touchstart');
+                        var touchmove = Rx.Observable.fromEvent(abc, 'touchmove');
+                        var touches = Rx.Observable.merge(touchstart, touchmove);
+                        var letters = touches.map(function (event) {
                             event.preventDefault();
                             var touch = event.touches[0];
                             var elem = document.elementFromPoint(touch.clientX, touch.clientY);

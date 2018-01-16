@@ -50,12 +50,13 @@ type alias Model =
     { gesture : Touch.Gesture
     , touchType : Maybe TouchType
     , posY : Float
+    , letter : Maybe String
     }
 
 
 initialModel : Model
 initialModel =
-    { gesture = Touch.blanco, touchType = Nothing, posY = -1.0 }
+    { gesture = Touch.blanco, touchType = Nothing, posY = -1.0, letter = Nothing }
 
 
 init : Flags -> ( Model, Cmd Msg )
@@ -91,11 +92,11 @@ gestureType gesture =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        AbcTouched val ->
-            Debug.log ("AbcTouched " ++ val) ( model, Cmd.none )
-
         NoOp ->
             ( model, Cmd.none )
+
+        AbcTouched l ->
+            ( { model | letter = Just l }, Cmd.none )
 
         Swipe s touch ->
             let
@@ -123,50 +124,65 @@ update msg model =
 
 
 
-
 -- VIEW
 
 
 theABC : List Char
 theABC =
-    toList "ABCDEFGHIJKLMNOPQRSTUVWXYZ" -- ÄÖÜ ?
+    toList "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+
+
+-- ÄÖÜ ?
 
 
 view : Model -> H.Html Msg
-view _ =
-    H.div [ HA.class "container" ]
-        [ H.div []
-            (List.map (\n -> H.div [ HA.class "items" ] [ H.text ("item" ++ toString n) ]) (List.range 1 100))
-        , H.div
-            [ HA.class "settings"
+view model =
+    let
+        letterDisplay =
+            case model.letter of
+                Nothing ->
+                    H.div [] []
 
-            --            , Touch.onStart Swipe
-            --            , Touch.onEnd SwipeEnd
-            ]
-            [ H.img [ HA.src "images/ic_settings_black_24dp_2x.png", HA.alt "Settings" ] [] ]
-        , H.div
-            [ HA.id "abcId"
-            , HA.class "abc"
-            , HA.style [ ( "height", "100%" ) ]
-            ]
-            [ svg [ width "100%", height "100%", viewBox "0 0 50 530" ]
-                [ text_
-                    [ x "0", y "15", fontSize "16", writingMode "tb", rotate "-90" ]
-                    (List.map
-                        (\ch ->
-                            let
-                                letter =
-                                    (fromChar ch)
-                            in
-                                tspan
-                                    [ x "0"
-                                    , dy "10"
-                                    , fontFamily "monospace"
-                                    ]
-                                    [ text letter ]
+                Just l ->
+                    H.div
+                        [ HA.class "letteroverlay" ]
+                        [ text l ]
+    in
+        H.div [ HA.class "container" ]
+            [ H.div []
+                (List.map (\n -> H.div [ HA.class "items" ] [ H.text ("item" ++ toString n) ]) (List.range 1 100))
+            , letterDisplay
+            , H.div
+                [ HA.class "settings"
+
+                --            , Touch.onStart Swipe
+                --            , Touch.onEnd SwipeEnd
+                ]
+                [ H.img [ HA.src "images/ic_settings_black_24dp_2x.png", HA.alt "Settings" ] [] ]
+            , H.div
+                [ HA.id "abcId"
+                , HA.class "abc"
+                , HA.style [ ( "height", "100%" ) ]
+                ]
+                [ svg [ width "100%", height "100%", viewBox "0 0 50 530" ]
+                    [ text_
+                        [ x "0", y "15", fontSize "16", writingMode "tb", rotate "-90" ]
+                        (List.map
+                            (\ch ->
+                                let
+                                    letter =
+                                        (fromChar ch)
+                                in
+                                    tspan
+                                        [ x "0"
+                                        , dy "10"
+                                        , fontFamily "monospace"
+                                        ]
+                                        [ text letter ]
+                            )
+                            theABC
                         )
-                        theABC
-                    )
+                    ]
                 ]
             ]
-        ]

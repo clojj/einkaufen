@@ -8809,7 +8809,29 @@ var _zwilias$elm_touch_events$Touch$onStart = function (tagger) {
 };
 
 var _user$project$Main$theABC = _elm_lang$core$String$toList('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-var _user$project$Main$view = function (_p0) {
+var _user$project$Main$view = function (model) {
+	var letterDisplay = function () {
+		var _p0 = model.letter;
+		if (_p0.ctor === 'Nothing') {
+			return A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{ctor: '[]'});
+		} else {
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('letteroverlay'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg$text(_p0._0),
+					_1: {ctor: '[]'}
+				});
+		}
+	}();
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -8845,130 +8867,134 @@ var _user$project$Main$view = function (_p0) {
 					A2(_elm_lang$core$List$range, 1, 100))),
 			_1: {
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('settings'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$img,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$src('images/ic_settings_black_24dp_2x.png'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$alt('Settings'),
-									_1: {ctor: '[]'}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}),
+				_0: letterDisplay,
 				_1: {
 					ctor: '::',
 					_0: A2(
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$id('abcId'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('abc'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$style(
-										{
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'height', _1: '100%'},
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
+							_0: _elm_lang$html$Html_Attributes$class('settings'),
+							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
 							_0: A2(
-								_elm_lang$svg$Svg$svg,
+								_elm_lang$html$Html$img,
 								{
 									ctor: '::',
-									_0: _elm_lang$svg$Svg_Attributes$width('100%'),
+									_0: _elm_lang$html$Html_Attributes$src('images/ic_settings_black_24dp_2x.png'),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$svg$Svg_Attributes$height('100%'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 50 530'),
-											_1: {ctor: '[]'}
-										}
+										_0: _elm_lang$html$Html_Attributes$alt('Settings'),
+										_1: {ctor: '[]'}
 									}
 								},
-								{
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$id('abcId'),
+								_1: {
 									ctor: '::',
-									_0: A2(
-										_elm_lang$svg$Svg$text_,
-										{
+									_0: _elm_lang$html$Html_Attributes$class('abc'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(
+											{
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'height', _1: '100%'},
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$svg$Svg$svg,
+									{
+										ctor: '::',
+										_0: _elm_lang$svg$Svg_Attributes$width('100%'),
+										_1: {
 											ctor: '::',
-											_0: _elm_lang$svg$Svg_Attributes$x('0'),
+											_0: _elm_lang$svg$Svg_Attributes$height('100%'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$svg$Svg_Attributes$y('15'),
+												_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 50 530'),
+												_1: {ctor: '[]'}
+											}
+										}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$svg$Svg$text_,
+											{
+												ctor: '::',
+												_0: _elm_lang$svg$Svg_Attributes$x('0'),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$svg$Svg_Attributes$fontSize('16'),
+													_0: _elm_lang$svg$Svg_Attributes$y('15'),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$svg$Svg_Attributes$writingMode('tb'),
+														_0: _elm_lang$svg$Svg_Attributes$fontSize('16'),
 														_1: {
 															ctor: '::',
-															_0: _elm_lang$svg$Svg_Attributes$rotate('-90'),
-															_1: {ctor: '[]'}
-														}
-													}
-												}
-											}
-										},
-										A2(
-											_elm_lang$core$List$map,
-											function (ch) {
-												var letter = _elm_lang$core$String$fromChar(ch);
-												return A2(
-													_elm_lang$svg$Svg$tspan,
-													{
-														ctor: '::',
-														_0: _elm_lang$svg$Svg_Attributes$x('0'),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$svg$Svg_Attributes$dy('10'),
+															_0: _elm_lang$svg$Svg_Attributes$writingMode('tb'),
 															_1: {
 																ctor: '::',
-																_0: _elm_lang$svg$Svg_Attributes$fontFamily('monospace'),
+																_0: _elm_lang$svg$Svg_Attributes$rotate('-90'),
 																_1: {ctor: '[]'}
 															}
 														}
-													},
-													{
-														ctor: '::',
-														_0: _elm_lang$svg$Svg$text(letter),
-														_1: {ctor: '[]'}
-													});
+													}
+												}
 											},
-											_user$project$Main$theABC)),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
+											A2(
+												_elm_lang$core$List$map,
+												function (ch) {
+													var letter = _elm_lang$core$String$fromChar(ch);
+													return A2(
+														_elm_lang$svg$Svg$tspan,
+														{
+															ctor: '::',
+															_0: _elm_lang$svg$Svg_Attributes$x('0'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$svg$Svg_Attributes$dy('10'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$svg$Svg_Attributes$fontFamily('monospace'),
+																	_1: {ctor: '[]'}
+																}
+															}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$svg$Svg$text(letter),
+															_1: {ctor: '[]'}
+														});
+												},
+												_user$project$Main$theABC)),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		});
 };
 var _user$project$Main$swipeSensitivity = 30;
-var _user$project$Main$initialModel = {gesture: _zwilias$elm_touch_events$Touch$blanco, touchType: _elm_lang$core$Maybe$Nothing, posY: -1.0};
+var _user$project$Main$initialModel = {gesture: _zwilias$elm_touch_events$Touch$blanco, touchType: _elm_lang$core$Maybe$Nothing, posY: -1.0, letter: _elm_lang$core$Maybe$Nothing};
 var _user$project$Main$init = function (flags) {
 	return A2(
 		_elm_lang$core$Debug$log,
@@ -8979,9 +9005,9 @@ var _user$project$Main$init = function (flags) {
 		{ctor: '_Tuple2', _0: _user$project$Main$initialModel, _1: _elm_lang$core$Platform_Cmd$none});
 };
 var _user$project$Main$input = _elm_lang$core$Native_Platform.incomingPort('input', _elm_lang$core$Json_Decode$string);
-var _user$project$Main$Model = F3(
-	function (a, b, c) {
-		return {gesture: a, touchType: b, posY: c};
+var _user$project$Main$Model = F4(
+	function (a, b, c, d) {
+		return {gesture: a, touchType: b, posY: c, letter: d};
 	});
 var _user$project$Main$AbcTouched = function (a) {
 	return {ctor: 'AbcTouched', _0: a};
@@ -9009,13 +9035,18 @@ var _user$project$Main$update = F2(
 	function (msg, model) {
 		var _p2 = msg;
 		switch (_p2.ctor) {
-			case 'AbcTouched':
-				return A2(
-					_elm_lang$core$Debug$log,
-					A2(_elm_lang$core$Basics_ops['++'], 'AbcTouched ', _p2._0),
-					{ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none});
 			case 'NoOp':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'AbcTouched':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							letter: _elm_lang$core$Maybe$Just(_p2._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			case 'Swipe':
 				var _p3 = _p2._1;
 				var newGesture = A2(_zwilias$elm_touch_events$Touch$record, _p3, model.gesture);

@@ -62,3 +62,10 @@ body {
     /*grid-column: 6 / -1;*/
     /*grid-row: 1 / -1;*/
 }
+
+.letteroverlay {
+    background-color: lightblue;
+    position: fixed;
+    top: 10.0%;
+    right: 50%;
+}
