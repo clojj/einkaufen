@@ -11,6 +11,8 @@
 
 	<link rel="stylesheet" href="layout.css">
 
+	<script src="https://unpkg.com/rxjs/bundles/Rx.min.js" async defer></script>
+
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="694005772598-6ss1umbc4nbqg2q0ademd02bmr7bgpgt.apps.googleusercontent.com">
     <meta name="google-signin-cookiepolicy" content="single_host_origin">
@@ -87,15 +89,19 @@
                     var node = document.getElementById('demo');
                     var app = Elm.Main.embed(node, data);
                     function appReady() {
-                        function handlerABC(event) {
+
+                        var abc = document.getElementById('abcId');
+                        var move = Rx.Observable.fromEvent(abc, 'touchmove');
+                        var letters = move.map(function (event) {
                             event.preventDefault();
                             var touch = event.touches[0];
                             var elem = document.elementFromPoint(touch.clientX, touch.clientY);
-                            console.log('JS handler, touched ' + elem.firstChild.textContent);
-                            app.ports.input.send(elem.firstChild.textContent);
-                        }
-                        var abc = document.getElementById('abcId');
-                        abc.addEventListener('touchmove', handlerABC, {passive: false});
+                            return elem.firstChild.textContent;
+                        }).distinctUntilChanged();
+                        var lettersSub = letters.subscribe(function (letter) {
+                            // console.log('letter: ' + letter);
+                            app.ports.input.send(letter);
+                        });
                     }
                     setTimeout(appReady, 0);
                 } else {
