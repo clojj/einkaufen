@@ -8938,7 +8938,7 @@ var _user$project$Main$view = function (model) {
 											_0: _elm_lang$svg$Svg_Attributes$height('100%'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 20 530'),
+												_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 50 530'),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -8953,19 +8953,11 @@ var _user$project$Main$view = function (model) {
 											_0: _elm_lang$svg$Svg_Attributes$x('0'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$svg$Svg_Attributes$y('15'),
+												_0: _elm_lang$svg$Svg_Attributes$y('0'),
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$svg$Svg_Attributes$fontSize('16'),
-													_1: {
-														ctor: '::',
-														_0: _elm_lang$svg$Svg_Attributes$writingMode('tb'),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$svg$Svg_Attributes$rotate('-90'),
-															_1: {ctor: '[]'}
-														}
-													}
+													_1: {ctor: '[]'}
 												}
 											}
 										},
@@ -8980,7 +8972,7 @@ var _user$project$Main$view = function (model) {
 														_0: _elm_lang$svg$Svg_Attributes$x('0'),
 														_1: {
 															ctor: '::',
-															_0: _elm_lang$svg$Svg_Attributes$dy('10'),
+															_0: _elm_lang$svg$Svg_Attributes$dy('20'),
 															_1: {
 																ctor: '::',
 																_0: _elm_lang$svg$Svg_Attributes$fontFamily('monospace'),
@@ -8990,7 +8982,11 @@ var _user$project$Main$view = function (model) {
 													},
 													{
 														ctor: '::',
-														_0: _elm_lang$svg$Svg$text(letter),
+														_0: _elm_lang$svg$Svg$text(
+															A2(
+																_elm_lang$core$Basics_ops['++'],
+																'— ',
+																A2(_elm_lang$core$Basics_ops['++'], letter, ' —'))),
 														_1: {ctor: '[]'}
 													});
 											},

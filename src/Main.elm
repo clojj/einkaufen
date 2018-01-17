@@ -167,9 +167,9 @@ view model =
                 , HA.class "abc"
                 , HA.style [ ( "height", "100%" ) ]
                 ]
-                [ svg [ HA.id "svgABC", width "100%", height "100%", viewBox "0 0 20 530" ]
+                [ svg [ HA.id "svgABC", width "100%", height "100%", viewBox "0 0 50 530" ]
                     [ text_
-                        [ x "0", y "15", fontSize "16", writingMode "tb", rotate "-90" ]
+                        [ x "0", y "0", fontSize "16" ]
                         (List.map
                             (\ch ->
                                 let
@@ -178,10 +178,10 @@ view model =
                                 in
                                     tspan
                                         [ x "0"
-                                        , dy "10"
+                                        , dy "20"
                                         , fontFamily "monospace"
                                         ]
-                                        [ text letter ]
+                                        [ text ("— " ++ letter ++ " —")]
                             )
                             theABC
                         )

@@ -99,11 +99,11 @@
                             var touch = event.touches[0];
                             var elem = document.elementFromPoint(touch.clientX, touch.clientY);
                             var textContent = elem.firstChild.textContent;
-                            return textContent.length > 1 ? "" : textContent;
+                            return textContent.length > 5 ? "" : textContent;
                         }).distinctUntilChanged();
                         var lettersSub = letters.subscribe(function (letter) {
                             // console.log('letter: ' + letter);
-                            app.ports.input.send(letter);
+                            app.ports.input.send(letter.substr(2,1));
                         });
                     }
                     setTimeout(appReady, 0);
