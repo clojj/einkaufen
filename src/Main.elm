@@ -1,12 +1,14 @@
 port module Main exposing (main)
 
 import Debug
-import Html as H
-import Html.Attributes as HA
-import Svg exposing (..)
-import Svg.Attributes exposing (..)
+import Navigation
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Svg as Svg
+import Svg.Attributes as SvgA
 import String exposing (toList, toUpper, fromChar)
 import Touch
+import List
 
 
 type alias Flags =
@@ -15,7 +17,7 @@ type alias Flags =
 
 main : Program Flags Model Msg
 main =
-    H.programWithFlags
+    programWithFlags
         { init = init
         , view = view
         , update = update
@@ -127,8 +129,8 @@ update msg model =
 -- VIEW
 
 
-theABC : List Char
-theABC =
+abcLetters : List Char
+abcLetters =
     toList "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
@@ -136,55 +138,93 @@ theABC =
 -- ÄÖÜ ?
 
 
-view : Model -> H.Html Msg
+link : String -> String -> Html Msg
+link name url =
+    a [ href url ] [ text name ]
+
+
+menu : Html Msg
+menu =
+    let
+        menuStyle =
+            style [ ( "list-style-type", "none" ) ]
+
+        menuElementStyle =
+            style [ ( "display", "inline" ), ( "margin-left", "10px" ) ]
+    in
+        div [ class "menu" ]
+            [ ul [ menuStyle ]
+                [ li [ menuElementStyle ] [ link "list" "#/list" ]
+                , li [ menuElementStyle ] [ link "admin" "#/admin" ]
+                ]
+            ]
+
+
+tspanLetters dx =
+    (List.map
+        (\ch ->
+            let
+                letter =
+                    (fromChar ch)
+            in
+                Svg.tspan
+                    [ SvgA.x dx
+                    , SvgA.dy "20"
+                    ]
+                    [ Svg.text letter ]
+        )
+        abcLetters
+    )
+
+
+view : Model -> Html Msg
 view model =
     let
         letterDisplay =
             case model.letter of
                 Nothing ->
-                    H.div [] []
+                    div [] []
 
                 Just l ->
-                    H.div
-                        [ HA.class "letteroverlay" ]
+                    div
+                        [ class "letteroverlay" ]
                         [ text l ]
     in
-        H.div []
+        div []
             [ letterDisplay
-            , H.div [ HA.class "container" ]
-                [ H.div []
-                    (List.map (\n -> H.div [ HA.class "items" ] [ H.text ("item" ++ toString n) ]) (List.range 1 100))
-                , H.div
-                    [ HA.class "settings"
+            , div
+                [ class "container" ]
+                [ div []
+                    (List.map (\n -> div [ class "items" ] [ text ("item" ++ toString n) ]) (List.range 1 100))
+                , div
+                    [ class "settings" ]
+                    [ img [ src "images/ic_settings_black_24dp_2x.png", alt "Settings" ] [] ]
+                ]
+            , div
+                [ id "abcId"
+                , style [ ( "height", "100%" ) ]
+                ]
+                [ Svg.svg [ SvgA.id "svgABC", SvgA.class "abc", SvgA.viewBox "0 0 30 530" ]
+                    [ Svg.text_
+                        [ SvgA.x "0", SvgA.y "0", SvgA.fontSize "16", SvgA.fontFamily "monospace", SvgA.visibility "hidden", SvgA.pointerEvents "all" ]
+                        (tspanLetters "0")
+                    , Svg.text_
+                        [ SvgA.x "0", SvgA.y "0", SvgA.fontSize "16", SvgA.fontFamily "monospace" ]
+                        (tspanLetters "10")
+                    , Svg.text_
+                        [ SvgA.x "0", SvgA.y "0", SvgA.fontSize "16", SvgA.fontFamily "monospace", SvgA.visibility "hidden", SvgA.pointerEvents "all" ]
+                        (tspanLetters "20")
+                    ]
+                ]
 
-                    --            , Touch.onStart Swipe
-                    --            , Touch.onEnd SwipeEnd
-                    ]
-                    [ H.img [ HA.src "images/ic_settings_black_24dp_2x.png", HA.alt "Settings" ] [] ]
-                ]
-            , H.div
-                [ HA.id "abcId"
-                , HA.class "abc"
-                , HA.style [ ( "height", "100%" ) ]
-                ]
-                [ svg [ HA.id "svgABC", width "100%", height "100%", viewBox "0 0 50 530" ]
-                    [ text_
-                        [ x "0", y "0", fontSize "16" ]
-                        (List.map
-                            (\ch ->
-                                let
-                                    letter =
-                                        (fromChar ch)
-                                in
-                                    tspan
-                                        [ x "0"
-                                        , dy "20"
-                                        , fontFamily "monospace"
-                                        ]
-                                        [ text ("— " ++ letter ++ " —")]
-                            )
-                            theABC
-                        )
-                    ]
-                ]
+            {-
+               , div
+                   [ id "menuId"
+                   , style [ ( "height", "10%" ) ]
+                   ]
+                   [ Svg.svg [ SvgA.id "svgMenu", SvgA.width "100%", SvgA.height "100%", SvgA.viewBox "0 0 50 50" ]
+                       [ Svg.circle [ SvgA.cx "25", SvgA.cy "50", SvgA.r "10", SvgA.stroke "black", SvgA.strokeWidth "3", SvgA.fill "grey" ] []
+                       ]
+                   ]
+            -}
             ]

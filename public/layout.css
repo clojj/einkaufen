@@ -52,10 +52,9 @@ body {
 }
 
 .abc {
-    /*background-color: lightblue;*/
+    background-color: lightblue;
     position: fixed;
     height: 100%;
-    width: 20%;
     top: 0.0%;
     right: 0;
 }
