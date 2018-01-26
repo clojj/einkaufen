@@ -81,7 +81,7 @@
             var csignin = document.getElementById('contSignin');
             csignin.parentNode.removeChild(csignin);
 
-            var userRef = database.ref('users/' + uid + "/active");
+            var userRef = database.ref('users/' + firebaseUser.uid + "/active");
             userRef.on('value', function(snapshot) {
                 var data = snapshot.val();
                 if (data) {
